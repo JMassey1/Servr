@@ -7,6 +7,7 @@ require (
 	github.com/gorilla/mux v1.8.1
 	github.com/pkg/sftp v1.13.9
 	golang.org/x/crypto v0.40.0
+	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
@@ -26,5 +27,4 @@ require (
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d // indirect
 	golang.org/x/sys v0.34.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
