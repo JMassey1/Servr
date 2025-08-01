@@ -2,8 +2,10 @@ package common
 
 import (
 	"fmt"
+	"os"
+	"time"
 
-	"github.com/charmbracelet/log"
+	CharmLog "github.com/charmbracelet/log"
 )
 
 type User struct {
@@ -12,8 +14,14 @@ type User struct {
 	Roles    []string `json:"roles"`
 }
 
+var logger = CharmLog.NewWithOptions(os.Stderr, CharmLog.Options{
+	ReportTimestamp: true,
+	TimeFormat:      time.Kitchen,
+	Prefix:          "Auth Service 🔐",
+})
+
 func ValidateAuth(token string) (*User, error) {
-	log.Info("Validating auth token: %s", token)
+	logger.Info("Validating auth token", "token", token)
 
 	if token == "valid-token" || token == "testpass" {
 		return &User{

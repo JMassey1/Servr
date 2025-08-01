@@ -1,0 +1,29 @@
+meta {
+  name: Echo
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://{{HOST}}:{{SOAP_PORT}}/soap
+  body: xml
+  auth: none
+}
+
+headers {
+  Content-Type: text/xml; charset=utf-8
+  SOAPAction: http://example.com/soap/Echo
+}
+
+body:xml {
+  <?xml version="1.0" encoding="UTF-8"?>
+  <soap:Envelope
+    xmlns:ns="http://example.com/soap"
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+      <Echo>
+        <message>Hello from FART client!</message>
+      </Echo>
+    </soap:Body>
+  </soap:Envelope>
+}

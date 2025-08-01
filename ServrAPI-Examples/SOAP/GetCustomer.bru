@@ -1,0 +1,24 @@
+meta {
+  name: GetCustomer
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://{{HOST}}:{{SOAP_PORT}}/soap
+  body: xml
+  auth: inherit
+}
+
+body:xml {
+  <?xml version="1.0" encoding="UTF-8"?>
+  <soap:Envelope
+    xmlns:ns="http://example.com/soap"
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+      <GetCustomer>
+        <customerId>1</customerId>
+      </GetCustomer>
+    </soap:Body>
+  </soap:Envelope>
+}

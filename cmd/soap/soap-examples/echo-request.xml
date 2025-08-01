@@ -2,8 +2,8 @@
 <soap:Envelope
     xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
     <soap:Body>
-        <Echo>
-            <message>Hello from SOAP client!</message>
-        </Echo>
+            <Echo>
+                <message>Hello from SOAP client!</message>
+            </Echo>
     </soap:Body>
 </soap:Envelope>

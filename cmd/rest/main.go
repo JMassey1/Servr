@@ -76,15 +76,16 @@ func setupRESTRoutes() *mux.Router {
 }
 
 func echoRequest(w http.ResponseWriter, r *http.Request) {
-	logger.Info("REST -- (POST): Echo request received")
+	logger.Info("Echo request received", "method", r.Method, "path", r.URL.Path)
 
 	var response EchoRequest
 	if err := json.NewDecoder(r.Body).Decode(&response); err != nil {
+		logger.Error("Invalid JSON Receieved", "error", err)
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(APIResponse{Success: false, Error: "Invalid JSON"})
 		return
 	}
-	logger.Info("REST -- Echo: '%s'", response.Message)
+	logger.Info(fmt.Sprintf("Echo: '%s'", response.Message))
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(APIResponse{Success: true, Data: response})
@@ -93,7 +94,7 @@ func echoRequest(w http.ResponseWriter, r *http.Request) {
 func getCustomer(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
-	logger.Info("REST -- GET (/customer/%d): Fetching customer with ID %d", id, id)
+	logger.Info("GetCustomer request received", "customerId", id, "method", r.Method, "path", r.URL.Path)
 
 	for _, customer := range mockCustomers {
 		if customer.ID == id {
@@ -110,6 +111,6 @@ func getCustomer(w http.ResponseWriter, r *http.Request) {
 func main() {
 	router := setupRESTRoutes()
 
-	logger.Info("Listening on :%d", consts.HTTP_PORT)
+	logger.Info(fmt.Sprintf("Listening on :%d", consts.HTTP_PORT))
 	logger.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", consts.HTTP_PORT), router))
 }

@@ -1,0 +1,12 @@
+services:
+  - name: rest
+    path: bin/rest
+    max_retries: 3
+  - name: soap
+    path: bin/soap
+    max_retries: 3
+  - name: sftp
+    path: bin/sftp
+    max_retries: 3
+    env:
+      - "SFTP_ROOT=/Users/jordanmassey/dev/Servr/sftp-root"
